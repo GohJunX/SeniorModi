@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Import GL Transactions with Excel Files</title>
+    <!-- Css File -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<!-- When start the program auto load the function -->
+
+<body onload="activateLicense()">
+
+    <div class="container">
+        <div class="column"></div>
+        <div class="column"></div>
+
+        <h2 class="custom-text">ABC Pte Ltd</h2>
+        <h3 class="custom-text">Import GL Transactions with Excel Files</h3>
+
+        <div class="column columnImportBtn">
+            <button class="btn importBtn" id="importBtn">Import</button>
+        </div>
+
+        <div class="column" hidden>
+            <button class="btn exportBtn" id="exportBtn">Export</button>
+        </div>
+    </div>
+
+    <div class="bottom">
+        <div class="row">
+            <button class="btn databaseBtn" id="aBtn">Setting</button>
+            <p class="version">M.version. 3 (23 May 2021)</p>
+        </div>
+    </div>
+
+    <!-- Authenticaiton Modal -->
+    <div id="aModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <!-- Header -->
+                <center>
+                    <h2 class="modalHead">Authenticaiton</h2>
+                </center>
+            </div>
+            <div class="modal-body">
+                <center>
+                    <!-- Authenticaiton Form -->
+                    <label>User Id:</label>
+                    <input type="text" id="aUserId"><br>
+
+                    <label>Password:</label>
+                    <input type="password" id="aPassword"><br>
+
+                    <button type="submit" id="aSubmit" class="submit">Comfirm</button>
+                    <button id="authenticationCancel" class="cancel">Cancel</button>
+                </center>
+            </div>
+        </div>
+    </div>
+
+    <!-- Database Modal -->
+    <div id="dbModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <center>
+                    <h2 class="modalHead">Setting</h2>
+                </center>
+            </div>
+            <div class="modal-body">
+                <!-- Databse Form -->
+                <center>
+                    <label>Server Name:</label>
+                    <input type="text" id="serverName"><br>
+
+                    <label>Instance Name:</label>
+                    <input type="text" id="instanceName"><br>
+
+                    <label>Password Option:</label>
+                    <select id="passwordOption">
+                        <option value="Window Authentication">Window Authentication</option>
+                        <option value="default">SQL Server Authentication</option>
+                    </select><br>
+
+                    <label>User Id:</label>
+                    <input type="text" id="userId"><br>
+
+                    <label>Password:</label>
+                    <input type="password" id="password"><br>
+
+                    <label>Database:</label>
+                    <input type="text" id="db"><br>
+
+                    <label>Company Name:</label>
+                    <input type="text" id="company"><br>
+
+                    <button type="submit" id="submit" class="submit">Comfirm</button>
+                    <button id="databaseCancel" class="cancel">Cancel</button>
+                </center>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Modal -->
+    <div id="importModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <center>
+                    <h2 class="modalHead">Import Excel File Data</h2>
+                </center>
+            </div>
+            <div class="modal-body">
+                <!-- Import Form -->
+                <center>
+                    <form>
+                        <label>Select Excel File:</label>
+                        <input type="file" id="EFile"><br>
+
+                        <label hidden>Batch No:</label>
+                        <input type="number" id="BATCHNO" value=10 min="00" max="99" hidden>
+
+                        <label hidden>Tax Code:</label>
+                        <input type="string" id="TaxCode" value="STAX" hidden><br>
+                    </form>
+
+                    <div id="excel_data"></div>
+
+                    <div style="overflow-x:auto; height: 360px;">
+                        <table id="importDataTable">
+                        </table>
+                    </div>
+                    <button type="submit" class="submit" id="btnImport">Comfirm</button>
+                    <button id="importCancel" class="cancel">Cancel</button>
+                </center>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div id="exportModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <center>
+                    <h2 class="modalHead">Export Excel File Data</h2>
+                </center>
+            </div>
+            <div class="modal-body">
+                <!-- Export Form -->
+                <center>
+                    <form id="myform" action="" method="">
+                        <div class="form-group">
+                            <lable>From Date :</lable>
+                            <input type="date" id="datestart" name="datestart" placeholder="Start Date"
+                                class="form-control">
+                        </div><br>
+                        <div class="form-group">
+                            <lable>End Date :</lable>
+                            <input type="date" id="dateend" name="dateend" placeholder="End Date" class="form-control">
+                        </div>
+                    </form>
+
+                    <button type="submit" class="submit" onclick="createNewExcelFile()" id="btnExport">Comfirm</button>
+                    <button id="exportCancel" class="cancel">Cancel</button>
+                </center>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<!-- Javascript file -->
+<script src="utils/global.js"></script>
+<script src="utils/license.js"></script>
+<script src="utils/setting.js"></script>
+<script src="utils/import.js"></script>
+<script src="utils/export.js"></script>
+<script src="utils/modal.js"></script>
+
+</html>

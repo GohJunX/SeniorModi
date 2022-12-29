@@ -1,0 +1,227 @@
+body{
+    background-image: url('../image/background.png');
+    background-repeat: no-repeat;
+    /* background-size: cover; */
+    background-size: 990px 741px;
+    max-width: 990px;
+    max-height: 741px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    padding-top: 70px;
+}
+
+.column{    
+    
+    margin: 10px;
+    padding: 10px;
+}
+
+.bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 10px;
+    margin-top: 210px;
+    padding: 5px;
+}
+
+.row{
+    margin: 0px;
+    /* margin-top: 250px; */
+    padding: 0px;
+}
+
+.version{
+    font-size: 10pt;
+    cursor: context-menu;
+    /* padding-top: 180px; */
+    /* color: #aeaeae; */
+}
+
+.btn{
+    border-style: solid;
+    border-width: 1px 1px;
+    border-radius: 12px;
+    border-color: #000;
+    font-size: 20pt;
+    text-decoration: none;
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px;
+}
+
+.columnImportBtn{
+    padding-top: 30px;
+}
+
+.databaseBtn:hover{
+    color: white;
+    background-color: #f1f106;
+    border-color: #f1f106;
+}
+
+.importBtn:hover{
+    color: white;
+    background-color: #48d248;
+    border-color: #48d248;
+}
+
+.exportBtn:hover{
+    color: white;
+    background-color: #f73838;
+    border-color: #f73838;
+}
+
+.btn:active{
+    color: white;
+    background-color: #9e9e9e;
+    border-color: #9e9e9e;
+}
+
+.btn:disabled{
+    color: white;
+    background-color: #9e9e9e;
+    border-color: #9e9e9e;
+    cursor: not-allowed;
+}
+
+/* Modal Header */
+.modal-header {
+    padding: 2px 16px;
+    background-color: white;
+    color: black;
+  }
+  
+  /* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    margin-top: 0px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; /* Could be more or less, depending on screen size */
+    height: Auto;
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modalHead{
+    margin: 10px;
+    font-size: 25pt;
+}
+
+label{
+    margin: 10px;
+    font-size: 15pt;
+}
+
+input{
+    margin: 10px;
+    font-size: 15pt;
+}
+
+select{
+    margin: 10px;
+    font-size: 15pt;
+}
+
+.submit{
+    border-style: solid;
+    border-width: 1px 1px;
+    border-radius: 12px;
+    border-color: #000;
+    font-size: 15pt;
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px;
+}
+
+.submit:hover{
+    border-style: solid;
+    border-width: 1px 1px;
+    border-radius: 12px;
+    border-color: #165a72;
+    background-color: #165a72;
+    color: white;
+}
+
+.submit:active{
+    color: white;
+    background-color: #9e9e9e;
+    border-color: #9e9e9e;
+}
+
+.cancel{
+    border-style: solid;
+    border-width: 1px 1px;
+    border-radius: 12px;
+    border-color: #000;
+    font-size: 15pt;
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px;
+}
+
+.cancel:hover{
+    border-style: solid;
+    border-width: 1px 1px;
+    border-radius: 12px;
+    border-color: red;
+    background-color: red;
+    color: white;
+}
+
+.cancel:active{
+    color: white;
+    background-color: #9e9e9e;
+    border-color: #9e9e9e;
+}
+
+.custom-text{
+    margin: 10px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 5px 5px;
+    white-space: nowrap;
+}
