@@ -58,6 +58,8 @@ document.getElementById("btnImport").onclick = async function() {
 
 
 async function importExcelFileToDatabase() {
+ 
+
     const workbook = new excel.Workbook();
 
     let eFile = document.getElementById("EFile");
@@ -76,13 +78,23 @@ async function importExcelFileToDatabase() {
     let pool = await sql.connect(config);
  
 
-
     let firstRow = worksheet.getRow(1).values;
     let hasHeaderRow = firstRow[1] !== undefined && firstRow[1] === "Product_Code";
 
-    
+    let query1 = `create unique index ix_uq on dbo.prodbom(bom_no, bom_prodcode)`;
+    pool.query(query1);
 
+    let insertdata=[];
     for (let index = hasHeaderRow ? 2 : 1; index < worksheetRows.length + 1; index++) {
+
+let ProdCode = await checkBomPC(pool);
+if (ProdCode === 65) {
+            return dialogs.alert(`Your product is empty, Please insert your product.`);
+            
+        }
+    
+else {
+       
         let values = worksheet.getRow(index).values;
         if(values.length !== 0){
   
@@ -95,24 +107,25 @@ async function importExcelFileToDatabase() {
         let BOM_Qty = getStringFromRow(values[6], "");
         let Print1 = getStringFromRow(values[7], "");
         let SEQ = getStringFromRow(values[8], "");
-
-        // Check BPC already Exists
-        let BomProdCode = await checkBomPC(pool, BOM_Product_Code);
-        if (BomProdCode === undefined || BomProdCode.recordset.length > 0) {
-            dialogs.alert(`Invalid BomProdCode (${BOM_Product_Code}).`);
-            break;
-        }
         
         console.log(Product_Code+' '+BOM_No+' '+BOM_Product_Code+' '+BOM_No_Semi_Final+' '+BOM_Location+' '+BOM_Qty+' '+Print1+' '+SEQ);
 let sqls = `insert into dbo.prodbom (prodcode, bom_no, bom_prodcode, bom_no_sf, bom_location, bom_qty, bom_print, bom_seq) values('${Product_Code}', '${BOM_No}', '${BOM_Product_Code}', '${BOM_No_Semi_Final}', '${BOM_Location}', '${BOM_Qty}', '${Print1}', '${SEQ}')`;
-
-pool.query(sqls)
-
-
+insertdata.push(sqls);
 }
 }
+
 }
-  
+let query2 = `DROP INDEX ix_uq ON dbo.prodbom;`;
+pool.query(query2);
+
+    let queryID = insertdata.join(" ");
+    var result=pool.query( queryID);
+    console.log(result);
+    result.then(()=>{ dialogs.alert("Imported Success.");}).catch(()=>{dialogs.alert(`Import Failed.`);})
+    
+
+}
+
 
 // Reset Element
     document.getElementById("EFile").value = null;
@@ -131,23 +144,35 @@ pool.query(sqls)
         }
     }
 
-    async function checkBomPC(pool, BOM_Product_Code) {
-        let BPC = undefined;
-        let query = `SELECT Top 1 * FROM dbo.prodbom WHERE bom_prodcode = '${BOM_Product_Code}'`;
+    // async function checkBomPC(pool, BOM_Product_Code) {
+    //     let BPC = undefined;
+    //     let query = `SELECT Top 1 * FROM dbo.prodbom WHERE bom_prodcode = '${BOM_Product_Code}'`;
+    
+    //     try {
+    //         BPC = await pool.request().query(query);
+    //         console.log(BPC);
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    
+    //     return BPC;
+    // }
+
+
+    async function checkBomPC(pool) {
+        let PC = undefined;
+        let query = `select prodcode from dbo.product`;
     
         try {
-            BPC = await pool.request().query(query);
-            console.log(BPC);
+            PC = await pool.request().query(query);
+            PC = JSON.stringify(PC).length
+            console.log(PC);
+
         } catch (err) {
             console.log(err);
         }
     
-        return BPC;
+        return PC;
     }
 
-
-
-
-
-
-  
+    
